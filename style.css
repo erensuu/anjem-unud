@@ -169,16 +169,6 @@ h2{
     padding:26px;
     box-shadow:0 4px 18px #6666ff1f
 }
-.card .ic{
-    width:48px;
-    height:48px;
-    border-radius:14px;
-    display:grid;
-    place-items:center;
-    font-size:24px;
-    margin-bottom:12px;
-    background:var(--pink)
-}
 .card h3{
     margin:0 0 6px;
     color:var(--ink);
@@ -195,9 +185,7 @@ h2{
 .card.big h3{
     color:#fff
 }
-.card.big .ic{
-    background:#ffffff33
-}
+
 .steps{
     counter-reset:s;
     display:grid;
