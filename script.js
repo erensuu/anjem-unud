@@ -52,3 +52,11 @@ document.querySelectorAll('[data-soon').forEach((el) => {
         toastTimer = setTimeout(() => toast.classList.remove('show'),2000);
     });
 });
+
+const logo = document.querySelector('nav .logo' );
+if(logo){
+    logo.addEventListener('click', () => {
+        const menu = document.getElementById('links');
+        if (menu) menu.classList.remove('open');
+    });
+}
