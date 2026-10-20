@@ -535,6 +535,6 @@ nav .logo img {
 }
 
 @media (max-width:720){
-    nav .logo img{height: 32px;}
-    .loader-logo img{height:70px}
+    nav .logo img{height: 28px;}
+    .loader-logo img{height:60px}
 }
