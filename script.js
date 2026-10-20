@@ -60,3 +60,69 @@ if(logo){
         if (menu) menu.classList.remove('open');
     });
 }
+(function () {
+    const road = document.getElementById('road');
+    const svg = document.getElementById('roadSvg');
+    const base = document.getElementById('roadBase');
+    const dash = document.getElementById('roadDash');
+    const scooter = document.getElementById('scooter');
+    if (!road ||!svg ||!base ||!dash ||!scooter)return;
+
+    let total = 0, ticking = false;
+
+    function build(){
+        const nav = document.getElementById('nav');
+        const footer = document.querySelector('footer');
+        const W = document.documentElement.clientWidth;
+        const H = footer
+            ? footer.offsetTop + footer.offsetHeight
+            : document.body.scrollHeight;
+
+        road.style.height = H + 'px';
+        svg.setAttribute('width', W);
+        svg.setAttribute('height', H);
+        svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+        const mobile = W < 720;
+        const m = mobile ? 16 : 90;
+        const startY = nav ? nav.offsetHeight : 80;
+        const endY = footer ? footer.offsetTop : H;
+        const n = Math.max(3, Math.round((endY - startY) / (window.innerHeight * 0.9)));
+        const step = (endY - startY) / n;
+
+        let d = `M ${m} ${startY}`;
+        for (let i = 1; i <= n; i++) {
+            const x0 = ((i-1) % 2) ? W - m : m;
+            const x1 = (i % 2) ? W - m : m;
+            const y0 = startY + step * (i - 1);
+            const y1 = startY + step * i;
+            const ym = (y0 + y1) / 2;
+            d += ` C ${x0} ${ym} ${x1} ${ym} ${x1} ${y1}`;
+        }
+        base.setAttribute('d', d);
+        dash.setAttribute('d', d);
+        base.style.strokeWidth = mobile ? 26 : 54;
+        dash.style.strokeWidth = mobile ? 2 : 3;
+        total = base.getTotalLength();
+        update();
+    }
+    function update(){
+        ticking = false;
+        const target = window.scrollY + window.innerHeight * 0.6;
+        let lo = 0, hi = total;
+        for (let i = 0; i < 14; i++) {
+            const mid = (lo + hi) / 2;
+            if (base.getPointAtLength(mid).y < target) lo = mid; else hi = mid;
+        }
+        const p = base.getPointAtLength(hi);
+        const p2 = base.getPointAtLength(Math.min(total, hi + 4));
+        const flip = p2.x > p.x ? 1 : -1;
+        scooter.style.transform = `translate(${p.x}px, ${p.y}px) translate(-50%, -50%) scaleX(${flip})`;
+    }
+    window.addEventListener('scroll', () => {
+        if (!ticking) {ticking = true; requestAnimationFrame(update);}
+    }, {pasive: true});
+    window.addEventListener('resize', build);
+    window.addEventListener('load', () => {build(); setTimeout(build, 600); });
+    build();
+})();

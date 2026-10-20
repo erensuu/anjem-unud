@@ -453,3 +453,68 @@ footer a{
         text-align: center;
     }
 }
+body{position: relative;}
+.road {
+    position: absolute; top: 0; left: 0; width: 100%;
+    overflow: hidden; pointer-events: none; z-index: 2;
+}
+.road svg{
+    display: block;
+}
+.road path {
+    fill: none; stroke-linecap: round;
+}
+#roadBase{stroke: var(--soft);opacity: .5;}
+#roadDash{stroke: #fff; stroke-dasharray: 16 16; opacity: .9;}
+
+#scooter{
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 0;
+    will-change: transform;
+    filter: drop-shadow(0 4px 6px rgba(60,50,160,.35));
+}
+#scooter img{
+    display: block;
+    width: 56px;
+    height: auto;
+}
+.hero > *, .wrap, footer{position: relative; z-index: 3;}
+@media (max-width: 720px){
+    #scooter img{width: 40px;}
+}
+
+.geng-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 820px;
+    margin: 0 auto;
+}
+.geng-card{
+    background: var(--card);
+    border-radius: 24px;
+    padding: 32px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 28px rgba(60,50,160, .18);
+    transition: transform .2s;
+}
+.geng-card:hover{transform: translateY(-4px);}
+.geng-card.jimbo{border-top: 6px solid var(--main);}
+.geng-card.kodya{border-top: 6px solid var(--accent);}
+.geng-card h3{ margin: 0; font-size: 24px; color: var(--ink);}
+.geng-card p{ margin: 0 0 8px; font-size: 14px; opacity: .8;}
+.geng-card .btn{
+    width: 100%;
+    max-width: 260px;
+    text-align: center;
+}
+.geng-card .btn.alt{margin-left: 0;}
+@media (max-width:720px){
+    .geng-grid{ grid-template-columns: 1fr;}
+}
