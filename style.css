@@ -518,3 +518,23 @@ body{position: relative;}
 @media (max-width:720px){
     .geng-grid{ grid-template-columns: 1fr;}
 }
+nav .logo{
+    display: flex;
+    align-items: center;
+}
+nav .logo img {
+    height:35px;
+    width: auto;
+    display: block;
+}
+
+.loader-logo img{
+    height: 86px;
+    width: auto;
+    display: block;
+}
+
+@media (max-width:720){
+    nav .logo img{height: 32px;}
+    .loader-logo img{height:70px}
+}
