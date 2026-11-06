@@ -1,3 +1,11 @@
+(function () {
+    const box = document.getElementById('maintenance');
+    if (!box) return;
+    document.body.classlist.add('maintenance');
+    [...document.body.children].forEach((el) => {
+        if (el !== box && el.tagName !== 'SCRIPT') el.innert = true;
+    });
+});
 
 const WA_GROUP = 'NYURUH YUK';
 
@@ -125,4 +133,4 @@ if(logo){
     window.addEventListener('resize', build);
     window.addEventListener('load', () => {build(); setTimeout(build, 600); });
     build();
-})();
+})(); 
